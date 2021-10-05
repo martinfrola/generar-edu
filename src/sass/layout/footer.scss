@@ -1,0 +1,41 @@
+footer {
+  .redes-logo {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  img {
+    height: 2rem;
+  }
+  .cursos {
+    display: flex;
+    flex-direction: column;
+    a {
+      padding-bottom: 5px;
+    }
+  }
+  .contacto {
+    display: flex;
+    flex-direction: column;
+    a {
+      padding-bottom: 5px;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+  .tench {
+    display: flex;
+    justify-content: end;
+    p {
+      margin-right: 5px;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+  @include tablet {
+    img {
+      height: 3rem;
+    }
+  }
+}

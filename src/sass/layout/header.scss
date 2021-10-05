@@ -1,0 +1,9 @@
+.bg-image {
+  height: calc(100vh - 56px);
+}
+.slide-text {
+  top: 25%;
+  @include tablet {
+    top: 50%;
+  }
+}
