@@ -1,7 +1,17 @@
 .cart-icon {
-  height: 1.5rem;
   margin-top: 1rem;
-  @include tablet {
-    margin: auto;
+  img{
+    height: 1.5rem;
+  }
+
+}
+.navigation{
+  a{
+    text-decoration: none;
+    transition: opacity .3s ease;
+    &:hover{
+      opacity: .9;
+    }
+
   }
 }

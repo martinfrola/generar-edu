@@ -1,4 +1,7 @@
+@import "./global/variables.scss";
 @import "./global/mixins.scss";
+@import "./global/generales.scss";
+@import "./global/animations.scss";
 
 @import "./layout/navbar.scss";
 @import "./layout/header.scss";
@@ -6,3 +9,5 @@
 @import "./layout/sobreNosotros.scss";
 @import "./layout/randomMsg.scss";
 @import "./layout/footer.scss";
+@import "./layout/gotop.scss";
+@import "./layout/contacto.scss";
