@@ -5,7 +5,7 @@ footer {
   }
   img {
     height: 1.5rem;
-    &:hover{
+    &:hover {
       transform: scale(1.2);
     }
   }
@@ -16,7 +16,7 @@ footer {
       padding-bottom: 5px;
     }
   }
-  .contacto {
+  .contacto-footer {
     display: flex;
     flex-direction: column;
     a {
