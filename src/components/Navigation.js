@@ -23,6 +23,7 @@ export default function Navigation() {
         const cerrarSesion = document.querySelector(".cerrar-sesion");
         iniciarSesion.classList.add("hide");
         cerrarSesion.classList.remove("hide");
+        console.log(user.emailVerified);
       } else {
         const cerrarSesion = document.querySelector(".cerrar-sesion");
         const iniciarSesion = document.querySelector(".iniciar-sesion");

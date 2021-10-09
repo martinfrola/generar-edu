@@ -1,3 +1,7 @@
+.login {
+  min-height: calc(100vh - 54px - 300px);
+}
+
 .container-login {
   width: 90%;
   border-radius: 5px;
@@ -44,7 +48,8 @@
   }
 }
 
-.new-acount {
+.new-acount,
+.new-psw {
   width: 80%;
   margin: auto auto;
   border-radius: 5px;
@@ -76,4 +81,9 @@
   &:hover {
     transform: scale(1.03);
   }
+}
+
+.btn-new-acount,
+.btn-new-psw:hover {
+  cursor: pointer;
 }

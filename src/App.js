@@ -7,6 +7,7 @@ import MisCursos from "./components/MisCursos";
 import Footer from "./components/Footer";
 import GoTopBtn from "./components/GoTopBtn";
 import Login from "./components/Login";
+import EmailVerification from "./components/EmailVerification";
 function App() {
   return (
     <React.Fragment>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contacto" component={Contacto} />
           <Route path="/miscursos" component={MisCursos} />
           <Route path="/login" component={Login} />
+          <Route path="/emailverification" component={EmailVerification} />
         </Switch>
         <Footer />
       </BrowserRouter>

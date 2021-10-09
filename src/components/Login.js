@@ -9,8 +9,12 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   FacebookAuthProvider,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
+
 export default function Login(props) {
+  //INICIALIZACIÓN DE FIREBASE
   const firebaseApp = initializeApp({
     apiKey: "AIzaSyAlgpl1EmHS5efB6iXH3aL97A5LY3ohsE4",
     authDomain: "generaredu.firebaseapp.com",
@@ -21,36 +25,34 @@ export default function Login(props) {
     measurementId: "G-F7EK0RVW5G",
   });
 
+  //HOOK PARA TOMAR LOS DATOS DE LOS CAMPOS DE EMAIL Y PASSWORD
   const [userLog, setUser] = useState({
     email: "",
     psw: "",
   });
 
-  function handleChange(e) {
-    setUser({
-      ...userLog,
-      [e.target.name]: e.target.value,
-    });
-  }
-  console.log(userLog);
-  function ShowForm() {
-    const hide = document.querySelector(".container-login");
-    const show = document.querySelector(".new-acount");
-    hide.classList.toggle("hide");
-    show.classList.toggle("hide");
-  }
-
+  //SIGNIN CON GOOGLE
   function signInGoogle() {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
-      .then((result) => {
-        props.history.push("/");
+      .then((user) => {
+        sendEmailVerification(auth.currentUser).then(() => {
+          // Email verification sent!
+          // ...
+        });
+        if (user.emailVerified === true) {
+          props.history.push("/");
+        } else {
+          props.history.push("/emailverification");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  //SIGNIN CON FACEBOOK
   function signInFacebook() {
     const provider = new FacebookAuthProvider();
     const auth = getAuth();
@@ -63,6 +65,15 @@ export default function Login(props) {
       });
   }
 
+  //GUARDAR LOS DATOS EN EL ESTADO
+  function handleChange(e) {
+    setUser({
+      ...userLog,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  //LOGIN CON EMAIL Y CONTRASEÑA
   function handleLogin(e) {
     e.preventDefault();
     const auth = getAuth();
@@ -76,11 +87,32 @@ export default function Login(props) {
       });
   }
 
+  //MOSTRAR FORMULARIO CUANDO NECESITAMOS CREAR NUEVA CUENTA
+  function ShowForm() {
+    window.scrollTo(0, 0);
+    const hide = document.querySelector(".container-login");
+    const title = document.querySelector(".login-title");
+    const show = document.querySelector(".new-acount");
+    hide.classList.toggle("hide");
+    title.classList.toggle("hide");
+    show.classList.toggle("hide");
+  }
+
+  //CREAR NUEVA CUENTA
   function handleNewAcount(e) {
-    const newAuth = getAuth();
-    createUserWithEmailAndPassword(newAuth, userLog.email, userLog.psw)
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, userLog.email, userLog.psw)
       .then((userCredential) => {
-        props.history.push("/");
+        sendEmailVerification(auth.currentUser).then(() => {
+          // Email verification sent!
+          // ...
+        });
+        if (userCredential.user.emailVerified === true) {
+          props.history.push("/");
+        } else {
+          props.history.push("/emailverification");
+        }
+
         console.log(userCredential);
       })
       .catch((error) => {
@@ -89,9 +121,35 @@ export default function Login(props) {
     e.preventDefault();
   }
 
+  //
+  function showFormPsw() {
+    window.scrollTo(0, 0);
+    const hide = document.querySelector(".container-login");
+    const title = document.querySelector(".login-title");
+    const showPsw = document.querySelector(".new-psw");
+    hide.classList.toggle("hide");
+    title.classList.toggle("hide");
+    showPsw.classList.toggle("hide");
+  }
+
+  function handleNewPsw(e) {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, userLog.email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    e.preventDefault();
+  }
+
   return (
     <div className="login bg-white">
-      <h2 className="text-center pt-5  text-subtitle">
+      <h2 className="text-center pt-5 login-title text-subtitle">
         Inicia sesión en tu cuenta
       </h2>
       <div className="container-login mx-auto mb-5 text-center show-form">
@@ -131,19 +189,27 @@ export default function Login(props) {
               Inicia sesión
             </button>
           </form>
-          <div className="btns">
-            <p>¿No tienes una cuenta?</p>
-            <button
-              className="btn text-text bg-dark text-light"
+          <div className="d-flex justify-content-center m-auto pt-3">
+            <p className="text-details me-1">¿Olvidaste tu contraseña?</p>
+            <p
+              className="text-details text-primary fw-bold btn-new-psw"
+              onClick={showFormPsw}
+            >
+              Recuperar contraseña
+            </p>
+          </div>
+          <div className="d-flex justify-content-center m-auto">
+            <p className="me-1 text-details">¿No tienes una cuenta?</p>
+            <p
+              className="text-primary fw-bold btn-new-acount text-details"
               onClick={ShowForm}
             >
-              {" "}
               Crear cuenta
-            </button>
+            </p>
           </div>
         </div>
       </div>
-      <div className="new-acount bg-dark pt-4 hide text-text">
+      <div className="new-acount my-5 bg-dark pt-4 hide text-text">
         <button
           className="bg-light border-0 rounded-1 mb-3 btn-volver"
           onClick={ShowForm}
@@ -175,6 +241,35 @@ export default function Login(props) {
             className="bg-light border-0 rounded-1 mb-3 btn-crear"
           >
             Crear
+          </button>
+        </form>
+      </div>
+
+      <div className="new-psw my-5 bg-dark pt-4 hide text-text">
+        <button
+          className="bg-light border-0 rounded-1 mb-3 btn-volver"
+          onClick={showFormPsw}
+        >
+          Volver
+        </button>
+        <h3 className="text-text text-center text-light pb-4">
+          Escribe tu email y recupera tu contraseña
+        </h3>
+        <form
+          className="login-email d-flex flex-column"
+          onSubmit={handleNewPsw}
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="Correo electrónico"
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            className="bg-light border-0 rounded-1 mb-3 btn-crear"
+          >
+            Recuperar contraseña
           </button>
         </form>
       </div>

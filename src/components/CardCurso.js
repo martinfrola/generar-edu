@@ -3,23 +3,21 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ImgCurso from "../img/curso-1.jpg";
 export default function CardCurso() {
-
-  window.addEventListener('scroll', animation)
+  window.addEventListener("scroll", animation);
 
   function animation() {
-      const actives = document.querySelectorAll('.animation-card')
-      
-    if(window.scrollY >= 300) {
-      actives.forEach(active => {
-         active.classList.add('show')
-         active.classList.remove('hide')
-      }) 
-     
-    } else if(window.scrollY <= 10){
-      actives.forEach(active => {
-        active.classList.remove('show')
-        active.classList.add('hide')
-     }) 
+    const actives = document.querySelectorAll(".animation-card");
+
+    if (window.scrollY >= 300) {
+      actives.forEach((active) => {
+        active.classList.add("show");
+        active.classList.remove("hide");
+      });
+    } else if (window.scrollY <= 10) {
+      actives.forEach((active) => {
+        active.classList.remove("show");
+        active.classList.add("hide");
+      });
     }
   }
 
@@ -28,7 +26,9 @@ export default function CardCurso() {
       <Card className="bg-secondary card-curso border-0 rounded-3">
         <Card.Img variant="top" src={ImgCurso} className="w-100" />
         <Card.Body className="bg-secondary ">
-          <Card.Title className="text-dark text-subtitle fw-bold">Card Title</Card.Title>
+          <Card.Title className="text-dark text-subtitle fw-bold">
+            Card Title
+          </Card.Title>
           <Card.Text className="text-dark text-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.

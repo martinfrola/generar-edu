@@ -1,45 +1,41 @@
 import React from "react";
 
 export default function RandomMsg() {
-
-  window.addEventListener('scroll', animation)
+  window.addEventListener("scroll", animation);
 
   function animation() {
-    console.log(window.scrollY);
-      const actives = document.querySelectorAll('.msg-content')
-      //Si la pantalla es mas grande que 768px: 
-      if(window.innerWidth > 768) {
-
-        if(window.scrollY >= 2400) {
-          //Cuando hago scroll hacia abajo
-          actives.forEach(active => {
-            active.classList.add('show')
-            active.classList.remove('hide')
-          }) 
-        } else if(window.scrollY <= 10){
-          //Cuando hago scroll hacia arriba
-            actives.forEach(active => {
-              active.classList.remove('show')
-              active.classList.add('hide')
-          }) 
-        }
-      //Si la pantalla es mas pequeña que 768px: 
-      }  else {
-            //Cuando hago scroll hacia abajo
-            if(window.scrollY >= 4400) {
-              actives.forEach(active => {
-                active.classList.add('show')
-                active.classList.remove('hide')
-              }) 
-         
-            } else if(window.scrollY <= 10){
-              //Cuando hago scroll hacia arriba
-                actives.forEach(active => {
-                  active.classList.remove('show')
-                  active.classList.add('hide')
-              }) 
-            }
-          }
+    const actives = document.querySelectorAll(".msg-content");
+    //Si la pantalla es mas grande que 768px:
+    if (window.innerWidth > 768) {
+      if (window.scrollY >= 2400) {
+        //Cuando hago scroll hacia abajo
+        actives.forEach((active) => {
+          active.classList.add("show");
+          active.classList.remove("hide");
+        });
+      } else if (window.scrollY <= 10) {
+        //Cuando hago scroll hacia arriba
+        actives.forEach((active) => {
+          active.classList.remove("show");
+          active.classList.add("hide");
+        });
+      }
+      //Si la pantalla es mas pequeña que 768px:
+    } else {
+      //Cuando hago scroll hacia abajo
+      if (window.scrollY >= 4400) {
+        actives.forEach((active) => {
+          active.classList.add("show");
+          active.classList.remove("hide");
+        });
+      } else if (window.scrollY <= 10) {
+        //Cuando hago scroll hacia arriba
+        actives.forEach((active) => {
+          active.classList.remove("show");
+          active.classList.add("hide");
+        });
+      }
+    }
   }
 
   return (
