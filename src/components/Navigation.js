@@ -83,9 +83,14 @@ export default function Navigation() {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Link to="/" className="cart-icon ">
-          <img src={Cart} alt="Shopping cart" />
-        </Link>
+        <div className="cart-icon">
+          <Link to="/">
+            <img src={Cart} alt="Shopping cart" />
+          </Link>
+          <div className="cart-products bg-secondary text-center align-items-center">
+            <p className="m-0 text-details">2</p>
+          </div>
+        </div>
       </div>
     </div>
   );

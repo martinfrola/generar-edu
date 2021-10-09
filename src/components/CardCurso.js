@@ -1,21 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ImgCurso from "../img/curso-1.jpg";
-export default function CardCurso() {
+export default function CardCurso(props) {
   window.addEventListener("scroll", animation);
 
   function animation() {
     const actives = document.querySelectorAll(".animation-card");
-
     if (window.scrollY >= 300) {
       actives.forEach((active) => {
-        active.classList.add("show");
+        active.classList.add("show-animation");
         active.classList.remove("hide");
       });
     } else if (window.scrollY <= 10) {
       actives.forEach((active) => {
-        active.classList.remove("show");
+        active.classList.remove("show-animation");
         active.classList.add("hide");
       });
     }
@@ -27,7 +27,7 @@ export default function CardCurso() {
         <Card.Img variant="top" src={ImgCurso} className="w-100" />
         <Card.Body className="bg-secondary ">
           <Card.Title className="text-dark text-subtitle fw-bold">
-            Card Title
+            {props.name}
           </Card.Title>
           <Card.Text className="text-dark text-text">
             Some quick example text to build on the card title and make up the
@@ -35,9 +35,11 @@ export default function CardCurso() {
           </Card.Text>
           <div className="text-center">
             <div className="d-flex justify-content-between">
-              <Button variant="primary" className="text-light me-1 text-text">
-                Mas Información
-              </Button>
+              <Link to={props.ruta}>
+                <Button variant="primary" className="text-light me-1 text-text">
+                  Mas Información
+                </Button>
+              </Link>
               <Button variant="primary" className="text-light ms-1 text-text">
                 Agregar al Carrito
               </Button>
@@ -45,6 +47,7 @@ export default function CardCurso() {
             <Card.Text className="py-3 m-0 fs-3 fw-bold text-dark text-subtitle">
               $5000{" "}
             </Card.Text>
+
             <Button
               variant="primary"
               className="btn-dark mt-0 w-100 text-light text-subtitle"

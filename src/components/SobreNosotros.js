@@ -13,13 +13,13 @@ export default function SobreNosotros() {
       if (window.scrollY >= 2100) {
         //Cuando hago scroll hacia abajo
         actives.forEach((active) => {
-          active.classList.add("show");
+          active.classList.add("show-animation");
           active.classList.remove("hide");
         });
       } else if (window.scrollY <= 10) {
         //Cuando hago scroll hacia arriba
         actives.forEach((active) => {
-          active.classList.remove("show");
+          active.classList.remove("show-animation");
           active.classList.add("hide");
         });
       }
@@ -28,13 +28,13 @@ export default function SobreNosotros() {
       //Cuando hago scroll hacia abajo
       if (window.scrollY >= 3700) {
         actives.forEach((active) => {
-          active.classList.add("show");
+          active.classList.add("show-animation");
           active.classList.remove("hide");
         });
       } else if (window.scrollY <= 10) {
         //Cuando hago scroll hacia arriba
         actives.forEach((active) => {
-          active.classList.remove("show");
+          active.classList.remove("show-animation");
           active.classList.add("hide");
         });
       }

@@ -1,13 +1,15 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import '../backgrounds.css'
+import "../backgrounds.css";
 export default function Header() {
   return (
     <Carousel fade className="carousel ">
       <Carousel.Item>
         <div className="bg-image slide-1"></div>
         <Carousel.Caption className="slide-text">
-          <h1 className="text-dark fw-bold text-header">LLEVANDOTE A LA PRÁCTICA</h1>
+          <h1 className="text-dark fw-bold text-header">
+            LLEVANDOTE A LA PRÁCTICA
+          </h1>
           <h3 className="text-dark text-subtitle">
             Aprende a llevar a la práctica todos tus conocimientos!
           </h3>
@@ -17,7 +19,9 @@ export default function Header() {
         <div className="bg-image slide-2"></div>
 
         <Carousel.Caption className="slide-text">
-          <h1 className="text-dark fw-bold text-header">APRENDE SOBRE REHABILITACIÓN</h1>
+          <h1 className="text-dark fw-bold text-header">
+            APRENDE SOBRE REHABILITACIÓN
+          </h1>
           <h3 className="text-dark text-subtitle">
             Aprende como abordar a distintos tipos de pacientes para diferentes
             patologías

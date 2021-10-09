@@ -10,13 +10,13 @@ export default function RandomMsg() {
       if (window.scrollY >= 2400) {
         //Cuando hago scroll hacia abajo
         actives.forEach((active) => {
-          active.classList.add("show");
+          active.classList.add("show-animation");
           active.classList.remove("hide");
         });
       } else if (window.scrollY <= 10) {
         //Cuando hago scroll hacia arriba
         actives.forEach((active) => {
-          active.classList.remove("show");
+          active.classList.remove("show-animation");
           active.classList.add("hide");
         });
       }
@@ -25,13 +25,13 @@ export default function RandomMsg() {
       //Cuando hago scroll hacia abajo
       if (window.scrollY >= 4400) {
         actives.forEach((active) => {
-          active.classList.add("show");
+          active.classList.add("show-animation");
           active.classList.remove("hide");
         });
       } else if (window.scrollY <= 10) {
         //Cuando hago scroll hacia arriba
         actives.forEach((active) => {
-          active.classList.remove("show");
+          active.classList.remove("show-animation");
           active.classList.add("hide");
         });
       }

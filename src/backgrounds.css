@@ -16,3 +16,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.header-curso {
+  background-image: url(./img/curso-1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

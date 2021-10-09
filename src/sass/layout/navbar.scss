@@ -1,17 +1,25 @@
 .cart-icon {
-  margin-top: 1rem;
-  img{
+  position: relative;
+  margin-top: 0.9rem;
+  img {
     height: 1.5rem;
   }
-
 }
-.navigation{
-  a{
+.navigation {
+  a {
     text-decoration: none;
-    transition: opacity .3s ease;
-    &:hover{
-      opacity: .9;
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 0.9;
     }
-
   }
+}
+
+.cart-products {
+  position: absolute;
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+  top: -5px;
+  right: -7px;
 }
