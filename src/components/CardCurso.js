@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ImgCurso from "../img/curso-1.jpg";
+import { useCarrito } from "../context/CarritoProvider";
+import { actionTypes } from "../context/CarritoRedicer";
+
 export default function CardCurso(props) {
   window.addEventListener("scroll", animation);
 
@@ -20,6 +23,22 @@ export default function CardCurso(props) {
       });
     }
   }
+
+  const [{ productos }, dispatch] = useCarrito();
+
+  function addCarrito() {
+    console.log("Click");
+    dispatch({
+      type: actionTypes.AGREGAR_AL_CARRITO,
+      infoProducto: {
+        nombre: props.name,
+        precio: props.precio,
+        id: props.id,
+      },
+    });
+  }
+
+  console.log(productos);
 
   return (
     <div className="col-lg-4 col-md-6 mb-5 animation-card hide">
@@ -40,12 +59,16 @@ export default function CardCurso(props) {
                   Mas Información
                 </Button>
               </Link>
-              <Button variant="primary" className="text-light ms-1 text-text">
+              <Button
+                variant="primary"
+                className="text-light ms-1 text-text"
+                onClick={addCarrito}
+              >
                 Agregar al Carrito
               </Button>
             </div>
             <Card.Text className="py-3 m-0 fs-3 fw-bold text-dark text-subtitle">
-              $5000{" "}
+              ${props.precio}
             </Card.Text>
 
             <Button

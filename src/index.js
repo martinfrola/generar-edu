@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./sass/app.scss";
-import "./bootstrap.scss";
+import "./_bootstrap.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { CarritoProvider } from "./context/CarritoProvider";
+import reducer, { initialCarrito } from "./context/CarritoRedicer";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CarritoProvider reducer={reducer} initialCarrito={initialCarrito}>
+      <App />{" "}
+    </CarritoProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

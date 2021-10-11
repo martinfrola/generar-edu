@@ -9,6 +9,7 @@ import GoTopBtn from "./components/GoTopBtn";
 import Login from "./components/Login";
 import EmailVerification from "./components/EmailVerification";
 import CursoInfo from "./components/CursoInfo";
+import Carrito from "./components/Carrito";
 function App() {
   return (
     <React.Fragment>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/emailverification" component={EmailVerification} />
           <Route path="/modulo" component={CursoInfo} />
+          <Route path="/carrito" component={Carrito} />
         </Switch>
         <Footer />
       </BrowserRouter>
