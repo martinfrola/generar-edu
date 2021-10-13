@@ -30,7 +30,7 @@ export default function CardCurso(props) {
     console.log("Click");
     dispatch({
       type: actionTypes.AGREGAR_AL_CARRITO,
-      infoProducto: {
+      item: {
         nombre: props.name,
         precio: props.precio,
         id: props.id,
@@ -38,7 +38,7 @@ export default function CardCurso(props) {
     });
   }
 
-  console.log(productos);
+  
 
   return (
     <div className="col-lg-4 col-md-6 mb-5 animation-card hide">

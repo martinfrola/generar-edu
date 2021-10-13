@@ -3,7 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "../backgrounds.css";
 export default function Header() {
   return (
-    <Carousel fade className="carousel ">
+    <Carousel fade className="carousel">
       <Carousel.Item>
         <div className="bg-image slide-1"></div>
         <Carousel.Caption className="slide-text">

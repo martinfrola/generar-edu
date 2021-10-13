@@ -1,7 +1,18 @@
-import React from "react";
-import Video from "../video/video-example.mp4";
+import React, { useState } from "react";
 
+import { app } from "../firebase";
 export default function CursoInfo() {
+  const storageRef = app.storage().ref("/Modulo 1/prueba.MP4");
+  const [videoUrl, setVideoUrl] = useState("");
+  storageRef
+    .getDownloadURL()
+    .then(function (url) {
+      setVideoUrl(url);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     <div className="info-curso bg-light">
       <div className="header-curso">
@@ -146,7 +157,7 @@ export default function CursoInfo() {
 
       <div className="video-trailer container text-center pb-5">
         <p className="text-dark">Mirá un adelanto del curso</p>
-        <video src={Video} controls controlslist="nodownload"></video>
+        <video src={videoUrl} controls controlslist="nodownload"></video>
       </div>
     </div>
   );

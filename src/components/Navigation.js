@@ -5,6 +5,9 @@ import Cart from "../img/shopping-cart.png";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { useCarrito } from "../context/CarritoProvider";
+import { initialCarrito } from "../context/CarritoRedicer";
+
 export default function Navigation() {
   const firebaseApp = initializeApp({
     apiKey: "AIzaSyAlgpl1EmHS5efB6iXH3aL97A5LY3ohsE4",
@@ -43,6 +46,9 @@ export default function Navigation() {
         console.log(error);
       });
   }
+
+  const [{ productos }, dispatch] = useCarrito(initialCarrito);
+
   return (
     <div className="bg-dark navigation">
       <div className="d-flex container">
@@ -58,6 +64,11 @@ export default function Navigation() {
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-end">
+              <Link to="/">
+                <Nav.Link href="#home" className="text-light text-text">
+                  Inicio
+                </Nav.Link>
+              </Link>
               <Link to="/miscursos">
                 <Nav.Link href="#home" className="text-light text-text">
                   Mi Cursos
@@ -83,14 +94,18 @@ export default function Navigation() {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div className="cart-icon">
-          <Link to="/carrito">
+        <Link to="/carrito">
+          <div className="cart-icon">
             <img src={Cart} alt="Shopping cart" />
-          </Link>
-          <div className="cart-products bg-secondary text-center align-items-center">
-            <p className="m-0 text-details">2</p>
+            {productos.length !== 0 ? (
+              <div className="cart-products bg-secondary text-center align-items-center ">
+                <p className="m-0 text-details ">{productos.length}</p>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

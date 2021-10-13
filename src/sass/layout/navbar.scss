@@ -9,6 +9,10 @@
   }
 }
 .navigation {
+  position: fixed;
+  width: 100vw;
+  z-index: 999;
+  top: 0;
   a {
     text-decoration: none;
     transition: opacity 0.3s ease;

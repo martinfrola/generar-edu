@@ -26,12 +26,10 @@
   position: unset;
   padding-bottom: 2rem;
   @include tablet {
-    padding-bottom: 0;
+    padding-bottom: 2rem;
     position: absolute;
     top: -25vh;
     right: 0;
-    height: 70vh;
-    max-height: 500px;
     width: 20vw;
     min-width: 250px;
   }
@@ -47,4 +45,8 @@
       width: 80vh;
     }
   }
+}
+
+.info-curso {
+  margin-top: 56px;
 }
