@@ -15,13 +15,16 @@ export default function Navigation() {
       if (user) {
         const iniciarSesion = document.querySelector(".iniciar-sesion");
         const cerrarSesion = document.querySelector(".cerrar-sesion");
+        const misCursos = document.querySelector(".mis-cursos");
         iniciarSesion.classList.add("hide");
         cerrarSesion.classList.remove("hide");
-        console.log(user.emailVerified);
+        misCursos.classList.remove("hide");
       } else {
         const cerrarSesion = document.querySelector(".cerrar-sesion");
         const iniciarSesion = document.querySelector(".iniciar-sesion");
+        const misCursos = document.querySelector(".mis-cursos");
         cerrarSesion.classList.add("hide");
+        misCursos.classList.add("hide");
         iniciarSesion.classList.remove("hide");
       }
     });
@@ -60,7 +63,7 @@ export default function Navigation() {
                   Inicio
                 </Nav.Link>
               </Link>
-              <Link to="/miscursos">
+              <Link to="/miscursos" className="mis-cursos">
                 <Nav.Link href="#home" className="text-light text-text">
                   Mi Cursos
                 </Nav.Link>

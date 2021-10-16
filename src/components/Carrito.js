@@ -3,6 +3,7 @@ import CardCarrito from "../statics/CardCarrito";
 import { useCarrito } from "../context/CarritoProvider";
 import { initialCarrito } from "../context/CarritoRedicer";
 import Button from "react-bootstrap/Button";
+
 export default function Carrito() {
   const [{ productos }, dispatch] = useCarrito(initialCarrito);
   let costo = 0;
