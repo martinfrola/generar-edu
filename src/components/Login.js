@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Facebook from "../img/facebook.png";
 import Google from "../img/google.png";
-import { initializeApp } from "firebase/app";
+import { app } from "../firebase";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -14,17 +14,6 @@ import {
 } from "firebase/auth";
 
 export default function Login(props) {
-  //INICIALIZACIÓN DE FIREBASE
-  const firebaseApp = initializeApp({
-    apiKey: "AIzaSyAlgpl1EmHS5efB6iXH3aL97A5LY3ohsE4",
-    authDomain: "generaredu.firebaseapp.com",
-    projectId: "generaredu",
-    storageBucket: "generaredu.appspot.com",
-    messagingSenderId: "1080331879362",
-    appId: "1:1080331879362:web:58551bd3aae910389a0c5b",
-    measurementId: "G-F7EK0RVW5G",
-  });
-
   //HOOK PARA TOMAR LOS DATOS DE LOS CAMPOS DE EMAIL Y PASSWORD
   const [userLog, setUser] = useState({
     email: "",

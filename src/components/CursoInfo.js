@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { app } from "../firebase";
+
 export default function CursoInfo() {
   const storageRef = app.storage().ref("/Modulo 1/prueba.MP4");
   const [videoUrl, setVideoUrl] = useState("");

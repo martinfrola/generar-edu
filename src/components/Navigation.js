@@ -4,21 +4,12 @@ import Nav from "react-bootstrap/Nav";
 import Cart from "../img/shopping-cart.png";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { initializeApp } from "firebase/app";
 import { useCarrito } from "../context/CarritoProvider";
 import { initialCarrito } from "../context/CarritoRedicer";
+import { app } from "../firebase";
 
 export default function Navigation() {
-  const firebaseApp = initializeApp({
-    apiKey: "AIzaSyAlgpl1EmHS5efB6iXH3aL97A5LY3ohsE4",
-    authDomain: "generaredu.firebaseapp.com",
-    projectId: "generaredu",
-    storageBucket: "generaredu.appspot.com",
-    messagingSenderId: "1080331879362",
-    appId: "1:1080331879362:web:58551bd3aae910389a0c5b",
-    measurementId: "G-F7EK0RVW5G",
-  });
-
+  const auth = getAuth();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,7 +26,7 @@ export default function Navigation() {
       }
     });
   });
-  const auth = getAuth();
+
   function signOutUser() {
     const auth = getAuth();
     signOut(auth)

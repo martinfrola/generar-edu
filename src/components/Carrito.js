@@ -1,5 +1,5 @@
 import React from "react";
-import CardCarrito from "./CardCarrito";
+import CardCarrito from "../statics/CardCarrito";
 import { useCarrito } from "../context/CarritoProvider";
 import { initialCarrito } from "../context/CarritoRedicer";
 import Button from "react-bootstrap/Button";
