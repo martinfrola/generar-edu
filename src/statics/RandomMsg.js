@@ -5,6 +5,7 @@ export default function RandomMsg() {
 
   function animation() {
     const actives = document.querySelectorAll(".msg-content");
+
     //Si la pantalla es mas grande que 768px:
     if (window.innerWidth > 768) {
       if (window.scrollY >= 2400) {

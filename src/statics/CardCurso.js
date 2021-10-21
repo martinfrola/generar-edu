@@ -26,7 +26,7 @@ export default function CardCurso(props) {
     }
   }
 
-  const [{ productos, videoIntro }, dispatch] = useCarrito();
+  const [{ productos }, dispatch] = useCarrito();
 
   function addCarrito() {
     console.log("Click");

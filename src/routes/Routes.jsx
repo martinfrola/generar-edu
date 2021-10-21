@@ -10,7 +10,7 @@ import Login from "../components/Login";
 import EmailVerification from "../components/EmailVerification";
 import CursoInfo from "../components/CursoInfo";
 import Carrito from "../components/Carrito";
-import visualizaciónCurso from "../components/visualizaciónCurso";
+import VisualizaciónCurso from "../components/VisualizaciónCurso";
 
 function Routes() {
   return (
@@ -25,7 +25,7 @@ function Routes() {
           <Route path="/emailverification" component={EmailVerification} />
           <Route path="/modulo" component={CursoInfo} />
           <Route path="/carrito" component={Carrito} />
-          <Route path="/viewcurso" component={visualizaciónCurso} />
+          <Route path="/viewcurso" component={VisualizaciónCurso} />
         </Switch>
         <Footer />
       </BrowserRouter>

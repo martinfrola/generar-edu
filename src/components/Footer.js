@@ -31,7 +31,7 @@ export default function Footer() {
             <a className="text-text text-light" href="/">
               Modulo 4: curso W
             </a>
-            <a className="text-tex text-light" href="/">
+            <a className="text-text text-light" href="/">
               Modulo 5: curso M
             </a>
           </div>
