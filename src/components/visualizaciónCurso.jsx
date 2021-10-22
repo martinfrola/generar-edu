@@ -6,6 +6,24 @@ import { app } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "firebase/compat/database";
 function VisualizaciónCurso(props) {
+  const currentPath = window.location.pathname;
+  const pathId = currentPath.split("/")[2];
+  const url = "https://generaredu.herokuapp.com/modulos";
+
+  const [modulo, setModulo] = useState("");
+
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) =>
+        data.map((item) => {
+          if (item.idModulo === pathId) {
+            setModulo(item);
+          }
+        })
+      );
+  }, []);
+
   //Hook para consumir la data del usuario
   const [dataUser, setDataUser] = useState({
     nombre: "",
@@ -40,10 +58,10 @@ function VisualizaciónCurso(props) {
     <div className="view-curso bg-light">
       <div className="principal-view-curso w-100">
         <video src={video} controls controlslist="nodownload" />
-        <ListaVideos dataUser={dataUser} />
+        <ListaVideos dataUser={dataUser} modulo={modulo} />
       </div>
 
-      <Comentarios dataUser={dataUser} />
+      <Comentarios dataUser={dataUser} modulo={modulo} />
     </div>
   );
 }
