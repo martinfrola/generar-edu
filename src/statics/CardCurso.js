@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import ImgCurso from "../img/curso-1.jpg";
 import { useCarrito } from "../context/CarritoProvider";
 import { actionTypes } from "../context/CarritoRedicer";
 
@@ -25,7 +24,7 @@ export default function CardCurso(props) {
       });
     }
   }
-
+  const path = `/modulo/${props.idModulo}`;
   const [{ productos }, dispatch] = useCarrito();
 
   function addCarrito() {
@@ -39,13 +38,16 @@ export default function CardCurso(props) {
       },
     });
   }
-  console.log(portada[0].formats.small.url);
+
   return (
     <div className="col-lg-3 col-md-6 mb-5 animation-card hide">
       <Card className="bg-secondary card-curso border-0 rounded-3">
         <Card.Img
           variant="top"
-          src={"https://generaredu.herokuapp.com/modulos" + portada[0].url}
+          src={
+            "https://generaredu.herokuapp.com/modulos" +
+            portada.formats.medium.url
+          }
           className="w-100"
         />
 
@@ -58,7 +60,7 @@ export default function CardCurso(props) {
           </Card.Text>
           <div className="text-center">
             <div className="d-flex justify-content-between">
-              <Link to={props.ruta}>
+              <Link to={path}>
                 <Button
                   variant="primary"
                   className="text-light me-1 text-details"

@@ -1,6 +1,4 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import Foto from "../img/curso-1.jpg";
 import Tacho from "../img/tacho.png";
 import { useCarrito } from "../context/CarritoProvider";
@@ -28,7 +26,12 @@ function CardCarrito(props) {
         </div>
       </div>
 
-      <img src={Tacho} className="tacho-btn pe-3" onClick={handleClick} />
+      <img
+        src={Tacho}
+        className="tacho-btn pe-3"
+        onClick={handleClick}
+        alt="Elimina la imagen"
+      />
     </div>
   );
 }

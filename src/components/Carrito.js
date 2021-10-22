@@ -8,9 +8,7 @@ export default function Carrito() {
   const [{ productos }, dispatch] = useCarrito(initialCarrito);
   let costo = 0;
 
-  productos.map((producto) => {
-    costo = costo + producto.precio;
-  });
+  productos.map((producto) => (costo = costo + producto.precio));
   return (
     <div className="carrito container mb-5">
       <h1 className="py-5  text-center text-subtitle text-dark">

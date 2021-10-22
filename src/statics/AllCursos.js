@@ -10,7 +10,7 @@ export default function AllCursos() {
       .then((response) => response.json())
       .then((data) => setCursos(data));
   }, []);
-  console.log(cursos);
+
   return (
     <div className="bg-light pt-5">
       <h1 className="text-dark text-center pb-5 text-title fw-bold">

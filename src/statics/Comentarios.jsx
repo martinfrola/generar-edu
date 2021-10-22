@@ -3,12 +3,9 @@ import CardComentario from "../statics/CardComentario";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { app } from "../firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Login from "../components/Login";
 import "firebase/compat/database";
 
 function Comentarios(props) {
-  console.log(props.dataUser);
   //Obtengo la fecha actual para enviar al estado junto con los datos del usuario
   const date = new Date();
   const año = date.getFullYear();
@@ -30,9 +27,10 @@ function Comentarios(props) {
       ...dataMsg,
       userName: props.dataUser.nombre,
       imgUser: props.dataUser.fotoUrl,
+      fecha: actualDate,
     });
   }, []);
-  console.log(dataMsg);
+
   //Mostrar el formulario para nuevo mensaje
   const handleClick = () => {
     const overlay = document.querySelector(".overlay");

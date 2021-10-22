@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, addDoc } from "firebase/firestore";
+import { app } from "../firebase";
+
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
 import Swal from "sweetalert2";
 
 function Contacto() {
-  //iNICIAMOS FIREBASE Y FIRESTOR PARA PODER ALMACENAR LOS DATOS DEL MENSAJE DE CONTACTO
-  const firebaseApp = initializeApp({
-    apiKey: "AIzaSyAlgpl1EmHS5efB6iXH3aL97A5LY3ohsE4",
-    authDomain: "generaredu.firebaseapp.com",
-    projectId: "generaredu",
-    storageBucket: "generaredu.appspot.com",
-    messagingSenderId: "1080331879362",
-    appId: "1:1080331879362:web:58551bd3aae910389a0c5b",
-    measurementId: "G-F7EK0RVW5G",
-  });
   const db = getFirestore();
 
   //HOOK PARA RECOLECTAR LOS CAMPOS PARA CONTACTO
@@ -39,6 +30,7 @@ function Contacto() {
     if (data.nombre !== "" && data.email !== "" && data.mensaje !== "") {
       try {
         const docRef = addDoc(collection(db, "MENSAJES DE CONTACTO"), data);
+
         // mensaje de confiración
         Swal.fire({
           icon: "success",

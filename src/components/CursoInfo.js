@@ -1,44 +1,32 @@
-import React, { useState } from "react";
-import { app } from "../firebase";
+import React, { useEffect, useState } from "react";
 
 export default function CursoInfo() {
-  const storageRef = app.storage().ref("/Modulo 1/prueba.MP4");
-  const [videoUrl, setVideoUrl] = useState("");
-  storageRef
-    .getDownloadURL()
-    .then(function (url) {
-      setVideoUrl(url);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  const [moduloData, setModuloData] = useState({});
+
+  const url = "https://generaredu.herokuapp.com/modulos";
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const datita = currentPath.split("/")[2];
+    console.log(datita);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => setModuloData(data[datita - 1]));
+  }, []);
 
   return (
     <div className="info-curso bg-light">
       <div className="header-curso">
         <div className="container header-curso_title">
           {" "}
-          <h1 className="text-title fw-bold text-dark">
-            Modulo 1: Evaluación de paciente Neurológico
-          </h1>
+          <h1 className="text-title fw-bold text-dark">{moduloData.titulo}</h1>
         </div>
       </div>
       <div className="my-5 container curso-main">
         <div className="info-content">
           <div className="deque">
             <h3 className="text-subtitle">¿De qué se trata este curso?</h3>
-            <p className="text-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam
-              architecto libero assumenda voluptas cumque non, quasi esse quam
-              corrupti quae cupiditate ipsum at maxime deserunt minus veritatis
-              mollitia ad impedit!
-            </p>
-            <p className="text-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, natus
-              dolorem! Autem vitae magnam ducimus officia rem perferendis
-              beatae, quisquam deserunt, sit, amet dolorum. Quia nam quo
-              mollitia eaque laudantium!
-            </p>
+            <p className="text-text">{moduloData.descripcionLarga}</p>
           </div>
           <div className="paraquien">
             <h3 className="text-subtitle">
@@ -62,7 +50,7 @@ export default function CursoInfo() {
           <h4 className="text-subtitle text-dark fw-bold pt-4">
             Compra este curso por solo
           </h4>
-          <p className="text-title text-dark fw-bold">$5000</p>
+          <p className="text-title text-dark fw-bold">${moduloData.precio}</p>
           <div className="btns-curso d-flex flex-column align-items-center">
             <button className="btn btn-none border-2 border-dark mb-4 w-75">
               Agregar al Carrito
@@ -157,7 +145,7 @@ export default function CursoInfo() {
 
       <div className="video-trailer container text-center pb-5">
         <p className="text-dark">Mirá un adelanto del curso</p>
-        <video src={videoUrl} controls controlslist="nodownload"></video>
+        <video src="" controls controlslist="nodownload"></video>
       </div>
     </div>
   );
