@@ -67,223 +67,47 @@ function ListaVideos(props) {
       });
     }
   };
+  const dataVideos = props.modulo.modulo_1s;
+  console.log(props.modulo.modulo_1s);
+  let urlVideo =
+    "https://generaredu.herokuapp.com/modulos" + dataVideos[0].video[0].url;
+  const handleVideoUrl = (e) => {
+    const posicion = e.target.id;
+    let urlVideo =
+      "https://generaredu.herokuapp.com/modulos" +
+      dataVideos[posicion].video[0].url;
+    console.log(urlVideo);
+  };
 
   return (
-    <div className="lista-videos bg-light">
-      <div className="botonera-lista">
-        <p className="my-0 ms-3 py-2 fw-bold text-center text-dark">
-          Lista de videos
-        </p>
+    <div className="principal-view-curso w-100">
+      <video src={urlVideo} controls controlslist="nodownload" />
+
+      <div className="lista-videos bg-light">
+        <div className="botonera-lista">
+          <p className="my-0 ms-3 py-2 fw-bold text-center text-dark">
+            Lista de videos
+          </p>
+        </div>
+        <ListGroup className="text-dark">
+          {dataVideos.map((item, i) => (
+            <ListGroup.Item
+              key={i}
+              className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item"
+            >
+              <label id={i} onClick={handleVideoUrl}>
+                {item.titulo}
+              </label>
+              <input
+                type="checkbox"
+                id="cb-1"
+                className="video-check"
+                onClick={handleClick}
+              />{" "}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
       </div>
-      <ListGroup className="text-dark">
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-        <ListGroup.Item className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item">
-          <label>Video numero 1</label>
-          <input
-            type="checkbox"
-            id="cb-1"
-            className="video-check"
-            onClick={handleClick}
-          />{" "}
-        </ListGroup.Item>
-      </ListGroup>
     </div>
   );
 }

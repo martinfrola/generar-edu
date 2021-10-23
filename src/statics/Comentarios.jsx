@@ -13,6 +13,8 @@ function Comentarios(props) {
   const dia = date.getDate();
   const actualDate = `${dia}/${mes}/${año}`;
 
+  const dataVideos = props.modulo.modulo_1s;
+
   //Hook para guardar la data del formulario
   const [dataMsg, setDataMsg] = useState({
     userName: "",
@@ -116,13 +118,17 @@ function Comentarios(props) {
           onSubmit={handelSubmit}
         >
           <p className="fw-bold">Completa los siguientes campos</p>
-          <select name="nombreVideo" id="" onChange={handleChange}>
+          <select
+            name="nombreVideo"
+            className="select-video w-100 mb-2 border-0 rounded"
+            onChange={handleChange}
+          >
             <option disabled selected>
               -selecciona el video sobre el que tienes dudas-
             </option>
-            <option value="Video 1">Video 1</option>
-            <option value="Video 2">Video 2</option>
-            <option value="Video 3">Video 3</option>
+            {dataVideos.map((item, i) => (
+              <option value={item.titulo}>{item.titulo}</option>
+            ))}
           </select>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">

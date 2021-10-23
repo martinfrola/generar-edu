@@ -56,12 +56,9 @@ function VisualizaciónCurso(props) {
 
   return (
     <div className="view-curso bg-light">
-      <div className="principal-view-curso w-100">
-        <video src={video} controls controlslist="nodownload" />
-        <ListaVideos dataUser={dataUser} modulo={modulo} />
-      </div>
+      {modulo && <ListaVideos dataUser={dataUser} modulo={modulo} />}
 
-      <Comentarios dataUser={dataUser} modulo={modulo} />
+      {modulo && <Comentarios dataUser={dataUser} modulo={modulo} />}
     </div>
   );
 }
