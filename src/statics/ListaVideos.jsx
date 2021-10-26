@@ -5,15 +5,16 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "firebase/compat/database";
 
 function ListaVideos(props) {
+  console.log(props.videos);
   //desestructuro las propiedades del componente
   const { userId } = props.dataUser;
-
+  const { idModulo } = props.modulo;
   //Creo el hook con el que voy a consumir la data de la db
   const [videosVistos, setVideosVistos] = useState(0);
 
   useEffect(() => {
     //Referencia a la db de cada usuario para la cantidad de videos vistos
-    const dbRef = app.database().ref("videosVistos/" + userId);
+    const dbRef = app.database().ref("videosVistos/" + `${userId}${idModulo}`);
     dbRef.on("value", (snapshot) => {
       //Si ya existe esa db...
       if (snapshot.val()) {
@@ -44,7 +45,7 @@ function ListaVideos(props) {
   //Funcion para cargar los videos vistos en la db al hacer click en el input
   const handleClick = (e) => {
     //Referencia a la base de datos del usuario
-    const dbRef = app.database().ref("videosVistos/" + userId);
+    const dbRef = app.database().ref("videosVistos/" + `${userId}${idModulo}`);
 
     const defineCheck = e.target.hasAttribute("checked");
 
@@ -67,16 +68,15 @@ function ListaVideos(props) {
       });
     }
   };
-  const dataVideos = props.modulo.modulo_1s;
-  console.log(props.modulo.modulo_1s);
-  let urlVideo =
-    "https://generaredu.herokuapp.com/modulos" + dataVideos[0].video[0].url;
+  const dataVideos = props.videos;
+
+  const [urlVideo, setUrlVideo] = useState(
+    props.urlVideos + dataVideos[0].video[0].url
+  );
+  console.log(urlVideo);
   const handleVideoUrl = (e) => {
     const posicion = e.target.id;
-    let urlVideo =
-      "https://generaredu.herokuapp.com/modulos" +
-      dataVideos[posicion].video[0].url;
-    console.log(urlVideo);
+    setUrlVideo(props.urlVideos + dataVideos[posicion].video[0].url);
   };
 
   return (

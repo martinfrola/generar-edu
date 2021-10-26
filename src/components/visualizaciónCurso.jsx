@@ -6,12 +6,11 @@ import { app } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "firebase/compat/database";
 function VisualizaciónCurso(props) {
+  // ------ CONSUMO DATA DE LOS CURSOS DESDE STRAPI ------
   const currentPath = window.location.pathname;
   const pathId = currentPath.split("/")[2];
   const url = "https://generaredu.herokuapp.com/modulos";
-
   const [modulo, setModulo] = useState("");
-
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -24,7 +23,19 @@ function VisualizaciónCurso(props) {
       );
   }, []);
 
-  //Hook para consumir la data del usuario
+  // ------ CONSUMO DATA DE LOS VIDEOS DEL CURSO CORRESPONDIENTE -------
+  const urlVideos = `https://generaredu.herokuapp.com/modulo-${pathId}-s`;
+  const [videos, setVideos] = useState("");
+
+  useEffect(() => {
+    fetch(urlVideos)
+      .then((response) => response.json())
+      .then((data) => setVideos(data));
+  }, []);
+
+  //------ CONSUMO LA DATA DEL USUARIO ------
+
+  //Hook para guardar la data
   const [dataUser, setDataUser] = useState({
     nombre: "",
     fotoUrl: "",
@@ -56,9 +67,19 @@ function VisualizaciónCurso(props) {
 
   return (
     <div className="view-curso bg-light">
-      {modulo && <ListaVideos dataUser={dataUser} modulo={modulo} />}
+      {/* Si hay info en el hook de modulos y videos renderiza el componente */}
+      {modulo && videos && (
+        <ListaVideos
+          dataUser={dataUser}
+          modulo={modulo}
+          videos={videos}
+          urlVideos={urlVideos}
+        />
+      )}
 
-      {modulo && <Comentarios dataUser={dataUser} modulo={modulo} />}
+      {modulo && videos && (
+        <Comentarios dataUser={dataUser} modulo={modulo} videos={videos} />
+      )}
     </div>
   );
 }
