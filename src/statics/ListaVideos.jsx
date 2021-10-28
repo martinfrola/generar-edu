@@ -68,15 +68,33 @@ function ListaVideos(props) {
       });
     }
   };
+
   const dataVideos = props.videos;
 
-  const [urlVideo, setUrlVideo] = useState(
-    props.urlVideos + dataVideos[0].video[0].url
-  );
-  console.log(urlVideo);
+  // const [urlVideo, setUrlVideo] = useState(
+  //   props.urlVideos + dataVideos[0].video[0].url
+  // );
+  // console.log(urlVideo);
+
+  const [urlVideo, setUrlVideo] = useState("");
+  const storage = app.storage();
+  const storageRef = storage
+    .ref()
+    .child(`Modulo ${idModulo}/modulo${idModulo}-video1.MP4`);
+  storageRef.getDownloadURL().then(function (url) {
+    if (urlVideo === "") {
+      setUrlVideo(url);
+    }
+  });
+
   const handleVideoUrl = (e) => {
     const posicion = e.target.id;
-    setUrlVideo(props.urlVideos + dataVideos[posicion].video[0].url);
+    const storageRef = storage
+      .ref()
+      .child(`Modulo ${idModulo}/modulo${idModulo}-video${posicion}.MP4`);
+    storageRef.getDownloadURL().then(function (url) {
+      setUrlVideo(url);
+    });
   };
 
   return (
@@ -95,7 +113,7 @@ function ListaVideos(props) {
               key={i}
               className=" d-flex align-items-center justify-content-between text-details bg-secondary curso-item"
             >
-              <label id={i} onClick={handleVideoUrl}>
+              <label id={i + 1} onClick={handleVideoUrl}>
                 {item.titulo}
               </label>
               <input
@@ -105,7 +123,7 @@ function ListaVideos(props) {
                 onClick={handleClick}
               />{" "}
             </ListGroup.Item>
-          ))}
+          ))}{" "}
         </ListGroup>
       </div>
     </div>
