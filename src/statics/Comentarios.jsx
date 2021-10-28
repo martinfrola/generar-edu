@@ -88,7 +88,7 @@ function Comentarios(props) {
         setComentarios(data);
       }
     });
-  }, [dbRef]);
+  }, []);
 
   return (
     <div className="seccion-comentarios container pb-5">

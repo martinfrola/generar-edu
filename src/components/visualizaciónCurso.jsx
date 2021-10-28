@@ -5,22 +5,24 @@ import Comentarios from "../statics/Comentarios";
 import { app } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "firebase/compat/database";
+
 function VisualizaciónCurso(props) {
   // ------ CONSUMO DATA DE LOS CURSOS DESDE STRAPI ------
   const currentPath = window.location.pathname;
   const pathId = currentPath.split("/")[2];
   const url = "https://generaredu.herokuapp.com/modulos";
   const [modulo, setModulo] = useState("");
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
-      .then((data) =>
+      .then((data) => {
         data.map((item) => {
           if (item.idModulo === pathId) {
             setModulo(item);
           }
-        })
-      );
+        });
+      });
   }, []);
 
   // ------ CONSUMO DATA DE LOS VIDEOS DEL CURSO CORRESPONDIENTE -------
@@ -42,10 +44,10 @@ function VisualizaciónCurso(props) {
     userId: "",
   });
 
-  //Consulta a la autenticación de usuario para obtener datos
-  const auth = getAuth();
-
   useEffect(() => {
+    //Consulta a la autenticación de usuario para obtener datos
+    const auth = getAuth();
+
     //Verifico si hay usuario
     onAuthStateChanged(auth, (user) => {
       //Si hay usuario..
