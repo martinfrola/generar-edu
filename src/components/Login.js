@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Facebook from "../img/facebook.png";
 import Google from "../img/google.png";
 import { app } from "../firebase";
@@ -11,9 +11,29 @@ import {
   FacebookAuthProvider,
   sendEmailVerification,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export default function Login(props) {
+  //Consulta a la autenticación de usuario para obtener datos
+  const auth = getAuth();
+  useEffect(() => {
+    //Verifico si hay usuario
+    onAuthStateChanged(auth, (user) => {
+      //Si hay usuario..
+
+      if (user) {
+        if (user.emailVerified) {
+          props.history.push("/");
+        } else {
+          sendEmailVerification(auth.currentUser).then(() => {
+            props.history.push("/emailverification");
+          });
+        }
+      }
+    });
+  }, [auth]);
+
   //HOOK PARA TOMAR LOS DATOS DE LOS CAMPOS DE EMAIL Y PASSWORD
   const [userLog, setUser] = useState({
     email: "",
@@ -26,15 +46,7 @@ export default function Login(props) {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((user) => {
-        sendEmailVerification(auth.currentUser).then(() => {
-          // Email verification sent!
-          // ...
-        });
-        if (user.emailVerified === true) {
-          props.history.push("/");
-        } else {
-          props.history.push("/emailverification");
-        }
+        console.log(user);
       })
       .catch((error) => {
         console.log(error);
@@ -68,7 +80,7 @@ export default function Login(props) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, userLog.email, userLog.psw)
       .then((userCredential) => {
-        props.history.push("/");
+        console.log(userCredential);
       })
       .catch((error) => {
         console.log("hubo un error", error);
@@ -92,16 +104,6 @@ export default function Login(props) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, userLog.email, userLog.psw)
       .then((userCredential) => {
-        sendEmailVerification(auth.currentUser).then(() => {
-          // Email verification sent!
-          // ...
-        });
-        if (userCredential.user.emailVerified === true) {
-          props.history.push("/");
-        } else {
-          props.history.push("/emailverification");
-        }
-
         console.log(userCredential);
       })
       .catch((error) => {
@@ -138,8 +140,8 @@ export default function Login(props) {
   }
 
   return (
-    <div className="login bg-white">
-      <h2 className="text-center pt-5 login-title text-subtitle">
+    <div className="login bg-white pt-5">
+      <h2 className="text-center login-title text-subtitle">
         Inicia sesión en tu cuenta
       </h2>
       <div className="container-login mx-auto mb-5 text-center show-form">
@@ -199,7 +201,8 @@ export default function Login(props) {
           </div>
         </div>
       </div>
-      <div className="new-acount my-5 bg-dark pt-4 hide text-text">
+
+      <div className="new-acount bg-dark pt-4 hide text-text">
         <button
           className="bg-light border-0 rounded-1 mb-3 btn-volver"
           onClick={ShowForm}
@@ -235,7 +238,7 @@ export default function Login(props) {
         </form>
       </div>
 
-      <div className="new-psw my-5 bg-dark pt-4 hide text-text">
+      <div className="new-psw  bg-dark pt-4 hide text-text">
         <button
           className="bg-light border-0 rounded-1 mb-3 btn-volver"
           onClick={showFormPsw}

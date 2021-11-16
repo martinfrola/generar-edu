@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { app } from "../firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import "firebase/compat/database";
 
 function ListaVideos(props) {

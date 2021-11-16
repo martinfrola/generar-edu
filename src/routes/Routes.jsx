@@ -11,7 +11,7 @@ import EmailVerification from "../components/EmailVerification";
 import CursoInfo from "../components/CursoInfo";
 import Carrito from "../components/Carrito";
 import VisualizaciónCurso from "../components/VisualizaciónCurso";
-
+import Finpago from "../components/Finpago";
 function Routes() {
   return (
     <React.Fragment>
@@ -26,6 +26,7 @@ function Routes() {
           <Route path="/modulo" component={CursoInfo} />
           <Route path="/carrito" component={Carrito} />
           <Route path="/viewcurso" component={VisualizaciónCurso} />
+          <Route path="/finpago" component={Finpago} />
         </Switch>
         <Footer />
       </BrowserRouter>

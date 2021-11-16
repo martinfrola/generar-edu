@@ -1,43 +1,39 @@
-// // SDK de Mercado Pago
-// const mercadopago = require("mercadopago");
-// // Agrega credenciales
-// mercadopago.configure({
-//   access_token:
-//     "APP_USR-2207575592258010-100323-27f423294df71f3bc95b24cbd3d096cd-36377523",
-// });
+const express = require("express");
+const app = express();
 
-// // Crea un objeto de preferencia
-// let preference = {
-//   items: [
-//     {
-//       title: "Mi producto",
-//       unit_price: 100,
-//       quantity: 1,
-//     },
-//   ],
-// };
+// SDK de Mercado Pago
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token:
+    "APP_USR-1101607055472183-110312-9bb899bb525989cb00439b3a8cc678ee-1011730652",
+});
 
-// mercadopago.preferences
-//   .create(preference)
-//   .then(function (response) {
-//     // Este valor reemplazará el string "<%= global.id %>" en tu HTML
-//     global.id = response.body.id;
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+let preference = {
+  items: [
+    {
+      title: "Mi producto",
+      unit_price: 100,
+      quantity: 1,
+    },
+  ],
+};
 
-// const mp = new MercadoPago("APP_USR-ae92ff42-233d-4ddc-bc19-628232a717ec", {
-//   locale: "es-AR",
-// });
+mercadopago.preferences
+  .create(preference)
+  .then(function (response) {
+    console.log(response);
+    // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+    global.id = response.body.id;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
-// // Inicializa el checkout
-// mp.checkout({
-//   preference: {
-//     id: "2207575592258010",
-//   },
-//   render: {
-//     container: ".cho-container", // Indica el nombre de la clase donde se mostrará el botón de pago
-//     label: "Pagar", // Cambia el texto del botón de pago (opcional)
-//   },
-// });
+app.get("/backend", (req, res) => {
+  res.send("<h1>Hola</h1>");
+});
+
+app.listen(8080, () => {
+  console.log("Desde el servidor 8080");
+});
