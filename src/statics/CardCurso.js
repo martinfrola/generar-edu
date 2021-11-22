@@ -34,11 +34,11 @@ export default function CardCurso(props) {
       item: {
         nombre: props.titulo,
         precio: props.precio,
-        id: props.id,
+        id: props.idModulo,
       },
     });
   }
-
+  console.log(props.idModulo);
   return (
     <div className="col-lg-3 col-md-6 mb-5 animation-card hide">
       <Card className="bg-secondary card-curso border-0 rounded-3">

@@ -11,7 +11,7 @@ export default function Carrito(props) {
   let costo = 0;
   let cantidad = productos.length;
   let nombreCursos = "";
-
+  let idCursos = [];
   const [user, setUser] = useState();
   const auth = getAuth();
 
@@ -24,14 +24,13 @@ export default function Carrito(props) {
       }
     });
   }, []);
-  if (user) {
-    console.log(user.uid);
-  }
+
   productos.map((producto, i) => {
     costo = costo + producto.precio;
     nombreCursos = nombreCursos + "---" + productos[i].nombre;
+    idCursos.push(productos[i].id);
   });
-
+  console.log(idCursos);
   return (
     <div className="carrito container mb-5">
       <h1 className="py-5  text-center text-subtitle text-dark">
@@ -59,7 +58,7 @@ export default function Carrito(props) {
         <form action="http://localhost:3001/pagos/" method="POST">
           <input type="hidden" name="title" value={nombreCursos} />
           <input type="hidden" name="price" value={costo} />
-          <input type="hidden" name="userId" value={user.uid} />
+          <input type="hidden" name="userId" value={idCursos} />
           <button type="submit">Comprar</button>
         </form>
       ) : (
