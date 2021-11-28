@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { app } from "../firebase";
-import { getDatabase, ref, set, onValue, get } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Finpago() {

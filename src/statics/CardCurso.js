@@ -7,7 +7,7 @@ import { actionTypes } from "../context/CarritoRedicer";
 
 export default function CardCurso(props) {
   const { portada } = props;
-  console.log(props);
+
   window.addEventListener("scroll", animation);
 
   function animation() {
