@@ -5,10 +5,10 @@ import { app } from "../firebase";
 import "firebase/compat/database";
 
 function ListaVideos(props) {
-  console.log(props.videos);
   //desestructuro las propiedades del componente
   const { userId } = props.dataUser;
-  const { idModulo } = props.modulo;
+  // const { idModulo } = props.modulo;
+  const idModulo = props.idModulo;
   //Creo el hook con el que voy a consumir la data de la db
   const [videosVistos, setVideosVistos] = useState(0);
 

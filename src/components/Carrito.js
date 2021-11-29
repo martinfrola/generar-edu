@@ -54,22 +54,21 @@ export default function Carrito(props) {
       ) : (
         ""
       )}
-      {user ? (
-        <form action="http://localhost:3001/pagos/" method="POST">
-          <input type="hidden" name="title" value={nombreCursos} />
-          <input type="hidden" name="price" value={costo} />
-          <input type="hidden" name="userId" value={idCursos} />
-          <button type="submit">Comprar</button>
-        </form>
-      ) : (
-        ""
-      )}
 
       <div className="text-center w-100">
         {productos.length !== 0 ? (
-          <Button className="btn-dark border border-primary text-light fw-bold text-text text-center">
-            COMPRAR AHORA
-          </Button>
+          <form action="http://localhost:3001/pagos/" method="POST">
+            <input type="hidden" name="title" value={nombreCursos} />
+            <input type="hidden" name="price" value={costo} />
+            <input type="hidden" name="userId" value={idCursos} />
+
+            <Button
+              type="submit"
+              className="btn-dark border border-primary text-light fw-bold text-text text-center"
+            >
+              COMPRAR AHORA
+            </Button>
+          </form>
         ) : (
           ""
         )}

@@ -9,24 +9,11 @@ import "firebase/compat/database";
 function VisualizaciónCurso(props) {
   // ------ CONSUMO DATA DE LOS CURSOS DESDE STRAPI ------
   const currentPath = window.location.pathname;
-  const pathId = currentPath.split("/")[2];
-  const url = "https://generaredu.herokuapp.com/modulos";
-  const [modulo, setModulo] = useState("");
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        data.map((item) => {
-          if (item.idModulo === pathId) {
-            setModulo(item);
-          }
-        });
-      });
-  }, []);
+  const idModulo = currentPath.split("/")[2];
 
   // ------ CONSUMO DATA DE LOS VIDEOS DEL CURSO CORRESPONDIENTE -------
-  const urlVideos = `https://generaredu.herokuapp.com/modulo-${pathId}-s`;
+  const urlVideos = `https://generaredu.herokuapp.com/modulo-${idModulo}-s`;
   const [videos, setVideos] = useState("");
 
   useEffect(() => {
@@ -70,17 +57,17 @@ function VisualizaciónCurso(props) {
   return (
     <div className="view-curso bg-light">
       {/* Si hay info en el hook de modulos y videos renderiza el componente */}
-      {modulo && videos && (
+      {videos && (
         <ListaVideos
           dataUser={dataUser}
-          modulo={modulo}
+          idModulo={idModulo}
           videos={videos}
           urlVideos={urlVideos}
         />
       )}
 
-      {modulo && videos && (
-        <Comentarios dataUser={dataUser} modulo={modulo} videos={videos} />
+      {videos && (
+        <Comentarios dataUser={dataUser} idModulo={idModulo} videos={videos} />
       )}
     </div>
   );

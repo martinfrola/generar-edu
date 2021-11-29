@@ -22,6 +22,8 @@ function Finpago() {
   const url = `https://api.mercadopago.com/v1/payments/${paymentId}?access_token=APP_USR-2207575592258010-100323-27f423294df71f3bc95b24cbd3d096cd-36377523`;
 
   const [cursoComprado, setCursoComprado] = useState();
+  const [nombreCurso, setNombreCurso] = useState();
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -29,6 +31,7 @@ function Finpago() {
         if (data.status === "approved") {
           //Obtengo el/los ids del curso que compró
           setCursoComprado(data.additional_info.items[0].id);
+          setNombreCurso(data.additional_info.items[0].title);
         } else {
           console.log("El pago no fué aprovado");
         }
@@ -36,7 +39,7 @@ function Finpago() {
         console.log(data);
       });
   }, []);
-
+  console.log(nombreCurso);
   //Entro a la base de datos de cursos comprados para ese usuario
   const db = getDatabase();
   const dbRef = ref(db, "permisosUser/" + user);
@@ -61,11 +64,18 @@ function Finpago() {
   }
 
   return (
-    <div className="my-5 pt-5">
+    <div className="bg-light fin-pago text-center p-5 text-dark">
       {cursoComprado ? (
-        <h1>
-          El usuario {user} compró los cursos con id {cursoComprado}
-        </h1>
+        <div>
+          <h3>Haz comprado el curso {nombreCurso}</h3>
+          <p className="redireccion-finpago">
+            ¡Ve hacia{" "}
+            <a href="/miscursos" className="fw-bold">
+              Mis Cursos
+            </a>{" "}
+            y empieza a aprender!
+          </p>
+        </div>
       ) : (
         "El pago no fué aprovado"
       )}

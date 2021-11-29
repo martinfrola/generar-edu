@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useCarrito } from "../context/CarritoProvider";
-import { actionTypes } from "../context/CarritoRedicer";
+import { actionTypes, initialCarrito } from "../context/CarritoRedicer";
 
 export default function CardCurso(props) {
   const { portada } = props;
@@ -38,7 +38,7 @@ export default function CardCurso(props) {
       },
     });
   }
-  console.log(props.idModulo);
+
   return (
     <div className="col-lg-3 col-md-6 mb-5 animation-card hide">
       <Card className="bg-secondary card-curso border-0 rounded-3">
@@ -79,13 +79,19 @@ export default function CardCurso(props) {
             <Card.Text className="py-3 m-0 fs-3 fw-bold text-dark text-text">
               ${props.precio}
             </Card.Text>
+            <form action="http://localhost:3001/pagos/" method="POST">
+              <input type="hidden" name="title" value={props.titulo} />
+              <input type="hidden" name="price" value={props.precio} />
+              <input type="hidden" name="userId" value={props.idModulo} />
 
-            <Button
-              variant="primary"
-              className="btn-dark mt-0 w-100 text-light text-text"
-            >
-              Comprar
-            </Button>
+              <Button
+                type="submit"
+                variant="primary"
+                className="btn-dark mt-0 w-100 text-light text-text"
+              >
+                Comprar
+              </Button>
+            </form>
           </div>
         </Card.Body>
       </Card>

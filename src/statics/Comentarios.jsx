@@ -61,7 +61,7 @@ function Comentarios(props) {
     if (dataMsg.fecha !== "" || dataMsg.nombreVideo !== "") {
       //Envio la data a la base de datos de firebase
       const db = app.firebase.database();
-      const dbRef = db.ref("comentarios/").child(`/${props.modulo.idModulo}`);
+      const dbRef = db.ref("comentarios/").child(`/${props.idModulo}`);
       dbRef
         .push()
         .set(dataMsg)
@@ -80,7 +80,7 @@ function Comentarios(props) {
   //Hook para guardar el objeto con los comentarios
   const [comentarios, setComentarios] = useState([]);
   const db = app.database();
-  const dbRef = db.ref("comentarios/").child(`/${props.modulo.idModulo}`);
+  const dbRef = db.ref("comentarios/").child(`/${props.idModulo}`);
   useEffect(() => {
     dbRef.on("value", (snapshot) => {
       if (snapshot.val()) {
