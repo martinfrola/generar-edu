@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import ImgCurso from "../img/curso-1.jpg";
 import Play from "../img/play.png";
 function CardMisCursos(props) {
-  const { titulo, idModulo } = props;
-  // const imgUrl =
-  //   "https://generaredu.herokuapp.com/modulos" + portada.formats.small.url;
+  const { titulo, idModulo, portada } = props;
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -22,7 +20,7 @@ function CardMisCursos(props) {
     <Link to={path} className="text-decoration-none text-dark">
       <div className="card-mis-cursos bg-secondary rounded  m-2 py-2 px-2">
         <div className="go-to-curso">
-          <img src="" alt={titulo} className="w-100 rounded go-img " />
+          <img src={portada} alt={titulo} className="w-100 rounded go-img " />
           <img className="go-icon" src={Play} alt="play button" />
         </div>
 

@@ -1,32 +1,39 @@
 import React, { useEffect, useState } from "react";
-
+import { app } from "../firebase";
+import { getDatabase, ref, set, get } from "firebase/database";
 export default function CursoInfo() {
-  const [moduloData, setModuloData] = useState({});
-
-  const url = "https://generaredu.herokuapp.com/modulos";
+  const [dataCurso, setDataCurso] = useState({});
+  const currentPath = window.location.pathname;
+  const idModulo = currentPath.split("/")[2];
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    const datita = currentPath.split("/")[2];
-    console.log(datita);
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setModuloData(data[datita - 1]));
+    const db = getDatabase();
+    const dbRef = ref(db, `cursos/modulo-${idModulo}`);
+    get(dbRef).then((snap) => {
+      setDataCurso(snap.val());
+    });
   }, []);
+
+  const storage = app.storage();
+  const storageRef = storage
+    .ref()
+    .child(`Modulo ${idModulo}/modulo${idModulo}-intro.MP4`);
+  storageRef.getDownloadURL().then(function (url) {
+    console.log(url);
+  });
 
   return (
     <div className="info-curso bg-light">
       <div className="header-curso">
         <div className="container header-curso_title">
           {" "}
-          <h1 className="text-title fw-bold text-dark">{moduloData.titulo}</h1>
+          <h1 className="text-title fw-bold text-dark">{dataCurso.titulo}</h1>
         </div>
       </div>
       <div className="my-5 container curso-main">
         <div className="info-content">
           <div className="deque">
             <h3 className="text-subtitle">¿De qué se trata este curso?</h3>
-            <p className="text-text">{moduloData.descripcionLarga}</p>
+            <p className="text-text">{dataCurso.descripcion_larga}</p>
           </div>
           <div className="paraquien">
             <h3 className="text-subtitle">
@@ -50,7 +57,7 @@ export default function CursoInfo() {
           <h4 className="text-subtitle text-dark fw-bold pt-4">
             Compra este curso por solo
           </h4>
-          <p className="text-title text-dark fw-bold">${moduloData.precio}</p>
+          <p className="text-title text-dark fw-bold">${dataCurso.precio}</p>
           <div className="btns-curso d-flex flex-column align-items-center">
             <button className="btn btn-none border-2 border-dark mb-4 w-75">
               Agregar al Carrito
@@ -77,7 +84,9 @@ export default function CursoInfo() {
                 <circle cx="12" cy="12" r="9" />
                 <polyline points="12 7 12 12 15 15" />
               </svg>
-              <p className="m-0">3 horas de contenido</p>
+              <p className="m-0">
+                {dataCurso.horas_contenido} horas de contenido
+              </p>
             </div>
             <div className="incluye-content text-text text-start ms-2 d-flex align-items-center m-2">
               <svg
@@ -96,7 +105,7 @@ export default function CursoInfo() {
                 <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
                 <rect x="3" y="6" width="12" height="12" rx="2" />
               </svg>
-              <p className="m-0"> 23 videos</p>
+              <p className="m-0"> {dataCurso.cantidad_videos} videos</p>
             </div>
             <div className="incluye-content text-text text-start ms-2 d-flex align-items-center m-2">
               <svg
@@ -145,7 +154,11 @@ export default function CursoInfo() {
 
       <div className="video-trailer container text-center pb-5">
         <p className="text-dark">Mirá un adelanto del curso</p>
-        <video src="" controls controlslist="nodownload"></video>
+        <video
+          src={dataCurso.video_intro}
+          controls
+          controlslist="nodownload"
+        ></video>
       </div>
     </div>
   );

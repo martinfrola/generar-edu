@@ -6,6 +6,7 @@ import { useCarrito } from "../context/CarritoProvider";
 import { actionTypes, initialCarrito } from "../context/CarritoRedicer";
 
 export default function CardCurso(props) {
+  console.log(props);
   const { portada } = props;
 
   window.addEventListener("scroll", animation);
@@ -42,14 +43,7 @@ export default function CardCurso(props) {
   return (
     <div className="col-lg-3 col-md-6 mb-5 animation-card hide">
       <Card className="bg-secondary card-curso border-0 rounded-3">
-        <Card.Img
-          variant="top"
-          src={
-            "https://generaredu.herokuapp.com/modulos" +
-            portada.formats.medium.url
-          }
-          className="w-100"
-        />
+        <Card.Img variant="top" src={props.portada} className="w-100" />
 
         <Card.Body className="bg-secondary ">
           <Card.Title className="text-dark text-text fw-bold">
